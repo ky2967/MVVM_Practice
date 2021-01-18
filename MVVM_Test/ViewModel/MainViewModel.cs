@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MVVM_Test.ViewModel
@@ -35,14 +36,54 @@ namespace MVVM_Test.ViewModel
             {
                 return iNumber;
             }
-
             set
             {
+                if(value < 0 || value > 10)
+                {
+                    MessageBox.Show("올바르지 않은 숫자입니다.");
+                    return;
+                }
+
                 iNumber = value;
                 OnPropertyChanged("Number");
+
+                MainText = value.ToString();
+
+                OnPropertyChanged("PlusEnable");
+                OnPropertyChanged("MinusEnable");
             }
         }
 
+        public bool PlusEnable
+        {
+            get
+            {
+                return Number >= 10 ? false : true;
+            }
+        }
+
+        public bool MinusEnable
+        {
+            get
+            {
+                return Number < 1 ? false : true;
+            }
+        }
+
+        private string sMainText;
+
+        public string MainText
+        {
+            get
+            {
+                return sMainText;
+            }
+            set
+            {
+                sMainText = $"선택된 숫자는 {value}입니다.";
+                OnPropertyChanged("MainText");
+            }
+        }
         #endregion
 
         #region > Command

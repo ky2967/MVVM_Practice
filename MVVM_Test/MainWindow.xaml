@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVM_Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="200" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,12 +13,12 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
             <Button Content="-" Width="30"
-                    Command="{Binding MinusCommand}"/>
+                    Command="{Binding MinusCommand}" IsEnabled="{Binding MinusEnable}"/>
             <TextBox Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                     Text="{Binding Number}"/>
+                     Text="{Binding Number, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"/>
             <Button Content="+" Width="30"
-                    Command="{Binding PlusCommand}"/>
+                    Command="{Binding PlusCommand}" IsEnabled="{Binding PlusEnable}"/>
         </StackPanel>
-        <TextBox Grid.Row="1"/>
+        <TextBox Grid.Row="1" Text="{Binding MainText}"/>
     </Grid>
 </Window>
